@@ -27,7 +27,12 @@
 
         </tbody>
     </table>
+    <p id="sid"></p>
     <script>
+        localStorage.setItem("key", "sfda")
+        document.getElementById("sid").innerText = localStorage.getItem("id")
+        document.cookie = "username=park;"
+        console.log(document.cookie)
         function clearBody(){
             document.getElementById("body").innerHTML = ""
         }
@@ -41,7 +46,6 @@
             const tdAge = document.createElement("td")
             tdName.innerHTML = name
             tdAge.innerHTML = age
-            // tdName.style.color = "red"
             if(persons.length%2===0){
                 tr.style.color = "red"
             }else{
@@ -64,6 +68,13 @@
                 text.value = ''
             }
         }
+
+
+        // tomcat session, cookie
+        // sessionStorage.setItem("key222","value2")
+
+
+
     </script>
 </body>
 </html>

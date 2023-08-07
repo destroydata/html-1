@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="hi">안녕하세요</p>
+    <button id="changeBtn" onclick="changeAction()">change</button>
+    <!-- <p>비밀번호</p>
+    <input id="pw">
+    <p>비밀번호 확인</p>
+    <input id="pw1">
+    <button>확인</button>
+    <p id="check"></p> -->
+</body>
+<script>
+    console.log(document.getElementById("pw"))
+    document.getElementById("changeBtn").addEventListener('drag', function(){
+        const hi = document.getElementById("hi")
+        if(hi.innerText === 'hi'){
+            hi.innerHTML = '안녕하세요'
+        }else{
+            hi.innerHTML = 'hi'
+        }
+    }) 
+    // function changeAction(){
+    //     console.log(document.getElementById("pw"))
+    //     const hi = document.getElementById("hi")
+    //     if(hi.innerText === 'hi'){
+    //         hi.innerHTML = '안녕하세요'
+    //     }else{
+    //         hi.innerHTML = 'hi'
+    //     }
+    // }
+</script>
+</html>

@@ -14,26 +14,35 @@
     <script>
         const user = {uId: "park", uPw: "1234"}
         const users = [user,{uId: "lee", uPw: "1234"}, {uId: "kim", uPw: "1234"}]
-        function login(){
+        const login = () => {
             const uid= document.getElementById("uId").value
             const upw= document.getElementById("uPw").value
             check(uid, upw)
         }
-        function check(uid, upw){
-            for (let index = 0; index < users.length; index++) {
-                const user = users[index];
-                if(uid === user.uId && upw === user.uPw){
-                    document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` +
-                    "<button onclick='localClear()'>"+uid+"clear</button>"
-                    localStorage.setItem("uId", uid)
-                    localStorage.setItem("uPw", upw)
-                    return
-                }
+        const check = (uid, upw) => {
+            // for (const user of users) {
+            //     // const user = users[index];
+            //     if(uid === user.uId && upw === user.uPw){
+            //         document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` +
+            //         "<button onclick='localClear()'>"+uid+"clear</button>"
+            //         localStorage.setItem("uId", uid)
+            //         localStorage.setItem("uPw", upw)
+            //         return
+            //     }
+            // }
+            const user = users.find(u=>uid === u.uId && upw === u.uPw);
+            if(user){
+                document.getElementById("box").innerHTML = `<p>${uid}환영합니다</p>` +
+                "<button onclick='localClear()'>"+uid+"clear</button>"
+                localStorage.setItem("uId", uid)
+                localStorage.setItem("uPw", upw)
+                return
             }
         }
-        function localClear(){
+        const localClear = () => {
             localStorage.clear()
             location.reload()
+            // location.href = "index2.html"
         }
         check(localStorage.getItem("uId"), localStorage.getItem("uPw"))
     </script>

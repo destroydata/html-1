@@ -7,6 +7,14 @@
 </head>
 <body>
     <h1>학생 정보</h1>
+    <select id="size">
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8</option>
+        <option value="10">10</option>
+    </select>
+    <button onclick="setSize()">사이즈</button>
     <table>
         <thead>
             <th>id</th>
@@ -21,10 +29,18 @@
         
     </div>
     <script>
+        let page = 1
+        let size = 4
+        const students = {}
+        
         const getData = async (page = 0) =>{
+            if(students[page]){
+                return students[page]
+            }
             const response = await fetch(
                 `http://192.168.0.184:8080/api/v1/member?page=${page}`)
             const body = await response.json() 
+            students[page] = body
             return body
         }
         const makeButtons = (totalPages) => {
@@ -47,18 +63,22 @@
             const body = document.getElementById("body")
             body.innerHTML = ''
             content.forEach(element => {
-                    body.innerHTML += 
-                    `<tr>
-                        <td>${element.id}</td>
-                        <td>${element.name}</td>
-                        <td>${element.number}</td>
-                        </tr>`
+                body.innerHTML += 
+                `<tr>
+                    <td>${element.id}</td>
+                    <td>${element.name}</td>
+                    <td>${element.number}</td>
+                    </tr>`
             });
         }
         const init = async () => {
             const {totalPages, content} = await getData()
             makeButtons(totalPages)
             makeBody(content)
+        }
+        const setSize = () => {
+            const {value} = document.getElementById("size")
+            console.log(value)
         }
         init()
     </script>

@@ -20,6 +20,7 @@
             <th>id</th>
             <th>name</th>
             <th>number</th>
+            <th>image</th>
         </thead>
         <tbody id="body">
 
@@ -39,7 +40,8 @@
                 return students[page]
             }
             const response = await fetch(
-                `http://192.168.0.184:8080/api/v1/member?page=${page}&size=${size}`)
+                `http://192.168.0.184:8080/api/v1/member?`+
+                `page=${page}&size=${size}`)
             const body = await response.json() 
             students[page] = body
             return body
@@ -68,8 +70,9 @@
                 body.innerHTML += 
                 `<tr>
                     <td>${element.id}</td>
-                    <td>${element.name}</td>
+                    <td style=${localStorage.getItem("name")===element.name?'color:red':null}>${element.name}</td>
                     <td>${element.number}</td>
+                    <td><img src='${element.image}' width='100'></td>
                     </tr>`
             });
         }
@@ -82,7 +85,6 @@
             const {value} = document.getElementById("size")
             state.students = {}
             state.size = value
-            // size = value
             init()
         }
         init()

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 계산기</title>
+  </head>
+  <body>
+    <h1>간단한 계산기</h1>
+    <input type="text" id="calculate" />
+    <div>
+      <br />
+      <button onclick="addToDisplay('7')">7</button>
+      <button onclick="addToDisplay('8')">8</button>
+      <button onclick="addToDisplay('9')">9</button>
+      <button onclick="addToDisplay('+')">+</button>
+      <br />
+      <button onclick="addToDisplay('4')">4</button>
+      <button onclick="addToDisplay('5')">5</button>
+      <button onclick="addToDisplay('6')">6</button>
+      <button onclick="addToDisplay('-')">-</button>
+      <br />
+      <button onclick="addToDisplay('1')">1</button>
+      <button onclick="addToDisplay('2')">2</button>
+      <button onclick="addToDisplay('3')">3</button>
+      <button onclick="addToDisplay('*')">*</button>
+      <br />
+      <button onclick="addToDisplay('0')">0</button>
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="addToDisplay('/')">/</button>
+    </div>
+    <div id="result"></div>
+    <script>
+      const addToDisplay = (value) => {
+        const display = document.getElementById("calculate");
+        display.value += value;
+      };
+      const clearDisplay = () => {
+        const display = document.getElementById("calculate");
+        display.value = "";
+        document.getElementById("result").textContent = "";
+      };
+      const calculateResult = () => {
+        try {
+          const displayValue = document.getElementById("calculate").value;
+          const result = eval(displayValue);
+          document.getElementById("result").textContent = "결과: " + result;
+        } catch (error) {
+          document.getElementById("result").textContent = "잘못된 입력입니다.";
+        }
+      };
+    </script>
+  </body>
+</html>

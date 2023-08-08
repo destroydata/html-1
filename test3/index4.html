@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let result = ""
+        let hasResult = false
+        const addCalculator = (operator) => {
+            let number = document.getElementById("inputNumber").value
+            result = document.getElementById("result")
+            if (hasResult) {
+                result.innerHTML = number + operator
+                document.getElementById("resultValue").innerHTML=""
+                hasResult = false
+            } else {
+                result.innerHTML = result.innerHTML + `${number}${operator}`
+            }
+            document.getElementById("inputNumber").value = ""
+        }
+        const resultCalculator = () => {
+            let number = document.getElementById("inputNumber").value
+            let resultText = document.getElementById("result").innerHTML
+            let calculator = resultText+number
+            console.log(calculator)
+            let resultValue = eval(calculator)
+            result.innerHTML = result.innerHTML+`${number}`
+            document.getElementById("resultValue").innerHTML = `= ${resultValue}`
+            hasResult = true
+        }
+    </script>
+    <h1>계산기</h1>
+    <input type="number" id="inputNumber">
+    <button id="+", onclick="addCalculator('+')">+</button>
+    <button id="-", onclick="addCalculator('-')">-</button>
+    <button id="*", onclick="addCalculator('*')">*</button>
+    <button id="/", onclick="addCalculator('/')">/</button>
+    <button onclick="resultCalculator()">=</button>
+    <div id="result"></div>
+    <div id="resultValue"></div>
+</body>
+</html>

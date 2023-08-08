@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="num" value="0">
+    <button onclick="add()">+</button>
+    <button onclick="diff()">-</button>
+    <button onclick="mul()">*</button>
+    <button onclick="divide()">/</button>
+    <div style="display: grid; align-items: center;grid-template-columns: repeat(3, 1fr);justify-items: center;">
+        <button style="width: 100%;" onclick="addNum(1)">1</button>
+        <button style="width: 100%;" onclick="addNum(2)">2</button>
+        <button style="width: 100%;" onclick="addNum(3)">3</button>
+        <button style="width: 100%;" onclick="addNum(4)">4</button>
+        <button style="width: 100%;" onclick="addNum(5)">5</button>
+        <button style="width: 100%;" onclick="addNum(6)">6</button>
+        <button style="width: 100%;" onclick="addNum(7)">7</button>
+        <button style="width: 100%;" onclick="addNum(8)">8</button>
+        <button style="width: 100%;" onclick="addNum(9)">9</button>
+        <button style="width: 100%;" >-</button>
+        <button style="width: 100%;" onclick="addNum(0)">0</button>
+        <button style="width: 100%;" onclick="getFetch()">-</button>
+    </div>
+    <h3 id="now"></h3>
+    <div id="box"></div>
+</body>
+<script>
+    const getFetch =async ()=>{
+        const res = await fetch("http://localhost:8080/api/v1/member")
+        const data = await res.json()
+        console.log(data )
+        
+    }
+    let now = 0
+    const addNum =(num)=>{
+        document.getElementById("num").value = document.getElementById("num").value + num
+    }
+    const print = (num, str)=>{
+        document.getElementById("now").innerHTML = `현재값 : ${num} 입니다`
+        const box = document.getElementById("box")
+        const p = document.createElement("p")
+        p.innerHTML = str
+        box.appendChild(p)
+        now = num
+    }
+    const add = () => {
+        const value = Number(document.getElementById("num").value)
+        if(value===0)return
+        const result = now + value
+        print(result, `${now} + ${value} = ${result}`)
+        document.getElementById("num").value = 0
+    }
+    const diff = (a) => {
+        const value = Number(document.getElementById("num").value)
+        if(value===0)return
+        const result = now - value
+        print(result, `${now} - ${value} = ${result}`)
+        document.getElementById("num").value = 0
+    }
+    const mul = (a) => {
+        const value = Number(document.getElementById("num").value)
+        if(value===0)return
+        const result = parseInt(now * value)
+        print(result, `${now} * ${value} = ${result}`)
+        document.getElementById("num").value = 0
+    }
+    const divide = (a) => {
+        const value = Number(document.getElementById("num").value)
+        if(value===0)return
+        const result = parseInt(now / value)
+        print(result , `${now} / ${value} = ${result}`)
+        document.getElementById("num").value = 0
+    }
+    document.getElementById("now").innerHTML = `현재값 : ${now} 입니다`
+    // console.log(document.body.scrollHeight)
+</script>
+</html>

@@ -9,8 +9,8 @@
     <h1>학생 정보</h1>
     <select id="size">
         <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="6">6</option>
+        <option value="4" selected>4</option>
+        <option value="6" >6</option>
         <option value="8">8</option>
         <option value="10">10</option>
     </select>
@@ -32,19 +32,21 @@
         let page = 1
         let size = 4
         const students = {}
-        
+        const state = {students:{},page:1, size:4 }
         const getData = async (page = 0) =>{
+            const {students, size} = state
             if(students[page]){
                 return students[page]
             }
             const response = await fetch(
-                `http://192.168.0.184:8080/api/v1/member?page=${page}`)
+                `http://192.168.0.184:8080/api/v1/member?page=${page}&size=${size}`)
             const body = await response.json() 
             students[page] = body
             return body
         }
         const makeButtons = (totalPages) => {
             const btns = document.getElementById("btns")
+            btns.innerHTML = ''
             for(let i=0; i< totalPages; i++){
                 const btn = document.createElement("button")
                 // <button></button>
@@ -78,7 +80,10 @@
         }
         const setSize = () => {
             const {value} = document.getElementById("size")
-            console.log(value)
+            state.students = {}
+            state.size = value
+            // size = value
+            init()
         }
         init()
     </script>

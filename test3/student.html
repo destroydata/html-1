@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="=device-width, initial-scale=1.0">
     <title>학생정보</title>
 </head>
 <body>
     <h1>학생 정보</h1>
-    <select id="size">
+    <select id="size" >
         <option value="2">2</option>
         <option value="4" selected>4</option>
         <option value="6" >6</option>
@@ -72,7 +72,7 @@
                     <td>${element.id}</td>
                     <td style=${localStorage.getItem("name")===element.name?'color:red':null}>${element.name}</td>
                     <td>${element.number}</td>
-                    <td><img src='${element.image}' width='100'></td>
+                    <td><img src='${element.image}' width='1000' loading="lazy"></td>
                     </tr>`
             });
         }
@@ -81,7 +81,8 @@
             makeButtons(totalPages)
             makeBody(content)
         }
-        const setSize = () => {
+        const setSize = (e) => {
+            console.log(e)
             const {value} = document.getElementById("size")
             state.students = {}
             state.size = value

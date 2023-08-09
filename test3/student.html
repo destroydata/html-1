@@ -21,6 +21,7 @@
             <th>name</th>
             <th>number</th>
             <th>image</th>
+            <th>수정</th>
         </thead>
         <tbody id="body">
 
@@ -36,6 +37,8 @@
         const state = {students:{},page:1, size:4 }
         const getData = async (page = 0) =>{
             const {students, size} = state
+            // const size = state.size
+            // const students = state.students
             if(students[page]){
                 return students[page]
             }
@@ -67,12 +70,14 @@
             const body = document.getElementById("body")
             body.innerHTML = ''
             content.forEach(element => {
+                // const {id, number, image, name} = element
                 body.innerHTML += 
                 `<tr>
                     <td>${element.id}</td>
                     <td style=${localStorage.getItem("name")===element.name?'color:red':null}>${element.name}</td>
                     <td>${element.number}</td>
                     <td><img src='${element.image}' width='1000' loading="lazy"></td>
+                    <td><a href="update.html?id=${element.id}">수정 </a></td>
                     </tr>`
             });
         }
